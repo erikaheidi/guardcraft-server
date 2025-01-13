@@ -1,0 +1,13 @@
+services:
+  java-server:
+    image: guardcraft-java
+    restart: unless-stopped
+    ports:
+      - 25565:25565
+    environment:
+      MC_gamemode: "survival"
+      MC_difficulty: "easy"
+      MC_motd: "Welcome to GuardCraft!"
+      #hyphens should be replaced with underscores
+      MC_level_name: "GuardCraft"
+      MC_level_seed: "-1718501946501227358"
