@@ -13,12 +13,14 @@ if [ "${#mcEnvs[@]}" -gt 0 ]; then
   for mcConfig in "${mcEnvs[@]}"; do
     IFS='_' read -ra CONFIG <<< "${mcConfig}"
     key=${CONFIG[1]}
-    if [ -n "${CONFIG[2]}" ]; then
-      key="${CONFIG[1]}-${CONFIG[2]}"
+    if [ "${#CONFIG[@]}" -gt 2 ]; then
+      for ((i=2; i<${#CONFIG[@]}; i++)); do
+        key="${key}-${CONFIG[i]}"
+      done
     fi
     value=${!mcConfig}
     echo "Setting $key=$value"
-    #sed -i "s/^$key=.*/$key=$value/" $SERVER_PATH/server.properties
+    sed -i "s~^$key=.*~$key=${value}~" $SERVER_PATH/server.properties
   done
 fi
 
