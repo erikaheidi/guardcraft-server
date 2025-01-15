@@ -2,6 +2,8 @@
 
 GuardCraft is a containerized Minecraft (Java) server that is designed to be secure and easy to use. It is built on top of the [Java JRE Chainguard Image](https://images.chainguard.dev/directory/image/jre/versions). 
 
+![0CVE - GuardCraft](./resources/0cve.png)
+
 ## Features
 The GuardCraft server is designed to be secure and easy to use. It includes the following features:
 - Minimal container image with low-to-zero CVEs
@@ -11,9 +13,6 @@ The GuardCraft server is designed to be secure and easy to use. It includes the 
 Currently, Guardcraft is available only for Minecraft Java version.
 
 *This setup was validated on an Ubuntu 24.04 system.*
-
-### GuardCraft Resource Pack
-This is a WIP feature that will be available *SOON*.
 
 ## Usage
 To build the image, run:
@@ -57,7 +56,7 @@ To connect to the server, you'll need to add a new server using the host machine
 
 > Find your local IP address on Linux systems: `ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p'`
 
-![Connect to Server](./assets/connect-java.png)
+![Connect to Server](./resources/connect-java.png)
 When connecting, you should see details about your user on the server logs:
 
 ```shell
@@ -89,10 +88,20 @@ services:
       MC_motd: "Welcome to GuardCraft!"
       MC_level_name: "GuardCraft"
       MC_level_seed: "-1718501946501227358"
+      # GuardCraft Custom Resource pack
+      # Using a CDN while the repo is private, later on move to repo release files
+      MC_resource_pack: "https://cdn.erikaheidi.com/minecraft/GuardCraft_Resource_Pack.zip"
+      MC_require_resource_pack: "true"
 ```
 
 This will set up a server in **Survival** mode, with **Easy** difficulty, and a **Welcome to GuardCraft!** message of the day. The server will be named **GuardCraft** and will use the specified seed to generate the world. You should spawn in an area with a village nearby.
 
-![Spawn Area](./assets/spawn.png)
+![Spawn Area](./resources/spawn.png)
 
 Have fun with 0 CVEs!
+
+### GuardCraft Resource Pack
+The included Resource Pack brings fun to another level with some custom textures. Preview:
+
+![GuardCraft Resource Pack](./resources/resource_pack.png)
+

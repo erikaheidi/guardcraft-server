@@ -13,6 +13,7 @@ services:
       MC_motd: "Welcome to GuardCraft!"
       MC_level_name: "GuardCraft"
       MC_level_seed: "-1718501946501227358"
-      # Custom Resource pack is a WIP, will update when it's ready
-      # MC_resource_pack: "https://github.com/chainguard-dev/guardcraft-server/raw/refs/heads/main/GuardCraft_Resource_Pack.zip"
-      # MC_require_resource_pack: "true"
+      # GuardCraft Custom Resource pack
+      # Using a CDN while the repo is private, later on move to repo release files
+      MC_resource_pack: "https://cdn.erikaheidi.com/minecraft/GuardCraft_Resource_Pack.zip"
+      MC_require_resource_pack: "true"
