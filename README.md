@@ -88,10 +88,6 @@ services:
       MC_motd: "Welcome to GuardCraft!"
       MC_level_name: "GuardCraft"
       MC_level_seed: "-1718501946501227358"
-      # GuardCraft Custom Resource pack
-      # Using a CDN while the repo is private, later on move to repo release files
-      MC_resource_pack: "https://cdn.erikaheidi.com/minecraft/GuardCraft_Resource_Pack.zip"
-      MC_require_resource_pack: "true"
 ```
 
 This will set up a server in **Survival** mode, with **Easy** difficulty, and a **Welcome to GuardCraft!** message of the day. The server will be named **GuardCraft** and will use the specified seed to generate the world. You should spawn in an area with a village nearby.

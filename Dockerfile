@@ -15,4 +15,4 @@ RUN chmod +x /usr/share/minecraft/build-config.sh
 RUN chown -R minecraft /usr/share/minecraft
 USER minecraft
 
-ENTRYPOINT /usr/share/minecraft/build-config.sh java -jar /usr/share/minecraft/server.jar nogui
+ENTRYPOINT ["/usr/share/minecraft/build-config.sh", "java", "-jar" , "/usr/share/minecraft/server.jar", "nogui"]
