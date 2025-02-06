@@ -7,13 +7,14 @@ services:
     environment:
       # Server properties Set Up
       # MC_* variables will be replaced in the server.properties file
-      # Hyphens should be replaced with underscores
+      # Hyphens must be replaced with underscores
       MC_gamemode: "survival"
       MC_difficulty: "easy"
       MC_motd: "Welcome to GuardCraft!"
       MC_level_name: "GuardCraft"
       MC_level_seed: "-1718501946501227358"
-      # GuardCraft Custom Resource pack
-      # Using a CDN while the repo is private, later on move to repo release files
-      MC_resource_pack: "https://cdn.erikaheidi.com/minecraft/GuardCraft_Resource_Pack.zip"
-      MC_require_resource_pack: "true"
+      # GuardCraft Custom Resource pack: Optional. Uncomment from here to enable
+      #MC_resource_pack: "https://github.com/chainguard-dev/guardcraft-server/releases/download/0.1.2/GuardCraft_Resource_Pack.zip"
+      #MC_resource_pack_sha1: "6102767c4dcd06ba10612b29ab15f5d1a58ce324"
+      #MC_resource_pack_id: "be26d8a0-6f82-4dcd-b286-6c5fc3a1e51f"
+      #MC_require_resource_pack: "false"
