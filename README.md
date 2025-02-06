@@ -1,8 +1,8 @@
-# GuardCraft - Guarded Containerized Minecraft Server
+# GuardCraft - a Containerized Minecraft Server
 
 GuardCraft is a containerized Minecraft (Java) server that is designed to be secure and easy to use. It is built on top of the [Java JRE Chainguard Image](https://images.chainguard.dev/directory/image/jre/versions). 
 
-![0CVE - GuardCraft](./resources/0cve.png)
+![Linky](./resources/linky.png)
 
 ## Features
 The GuardCraft server is designed to be secure and easy to use. It includes the following features:
@@ -68,7 +68,7 @@ java-server-1  | [18:14:30] [Server thread/INFO]: boredcatmom joined the game
 ````
 
 ## Configuration
-The GuardCraft server can be configured using dynamic environment variables that get replaced in the `server.properties` file. Any properties can be configured with the following format: `MC_<property_name>`. Hyphens (`-`) should be replaced with underscores (`_`). For example, to set the `server-port` property, use the `MC_server_port` environment variable.
+The GuardCraft server can be configured using dynamic environment variables that get replaced in the `server.properties` file. Any properties can be configured with the following format: `MC_<property_name>`. Hyphens (`-`) should be replaced with underscores (`_`). For example, to set the `server-port` property, use the `MC_server_port` environment variable. The [Minecraft wiki](https://minecraft.fandom.com/wiki/Server.properties) has a list of all available properties.
 
 Included `docker-compose.yaml` file:
 
@@ -82,22 +82,34 @@ services:
     environment:
       # Server properties Set Up
       # MC_* variables will be replaced in the server.properties file
-      # Hyphens should be replaced with underscores
+      # Hyphens must be replaced with underscores
       MC_gamemode: "survival"
       MC_difficulty: "easy"
       MC_motd: "Welcome to GuardCraft!"
       MC_level_name: "GuardCraft"
       MC_level_seed: "-1718501946501227358"
+      # GuardCraft Custom Resource pack: Optional. Uncomment from here to enable
+      #MC_resource_pack: "https://github.com/chainguard-dev/guardcraft-server/releases/download/0.1.2/GuardCraft_Resource_Pack.zip"
+      #MC_resource_pack_sha1: "6102767c4dcd06ba10612b29ab15f5d1a58ce324"
+      #MC_resource_pack_id: "be26d8a0-6f82-4dcd-b286-6c5fc3a1e51f"
+      #MC_require_resource_pack: "false"
 ```
 
 This will set up a server in **Survival** mode, with **Easy** difficulty, and a **Welcome to GuardCraft!** message of the day. The server will be named **GuardCraft** and will use the specified seed to generate the world. You should spawn in an area with a village nearby.
 
 ![Spawn Area](./resources/spawn.png)
 
-Have fun with 0 CVEs!
+To enable the custom GuardCraft Resource Pack, uncomment the last 4 lines in the `docker-compose.yaml` file. The client will automatically download the resource pack from the specified URL and verify the SHA1 checksum before applying it.
 
 ### GuardCraft Resource Pack
-The included Resource Pack brings fun to another level with some custom textures. Preview:
+The included Resource Pack brings fun to another level with some custom textures. Have a taste of fighting CVEs (Zombies) and 0Days (Creepers) to protect your friendly villagers! Or go for a swim and find Linky swirling in the oceans.
 
-![GuardCraft Resource Pack](./resources/resource_pack.png)
+![GuardCraft Resource Pack Preview](./resources/1.png)
 
+The pack is optional and can be enabled by uncommenting the last 4 lines of the included `docker-compose.yaml` file. The client will automatically download and apply the resource pack. 
+
+
+You can also manually install the resource pack to a local Minecraft client by downloading it directly from the [GuardCraft Resource Pack Releases page](https://github.com/chainguard-dev/guardcraft-server/releases). On Linux systems, you should unpack this zip file into the `~/.minecraft/resourcepacks` directory. You'll then be able to modify your world's settings to enable the resource pack.
+
+
+![Guardcraft Preview 2](./resources/3.png)
