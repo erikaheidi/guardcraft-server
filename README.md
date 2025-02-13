@@ -89,8 +89,8 @@ services:
       MC_level_name: "GuardCraft"
       MC_level_seed: "-1718501946501227358"
       # GuardCraft Custom Resource pack: Optional. Uncomment from here to enable
-      #MC_resource_pack: "https://github.com/chainguard-dev/guardcraft-server/releases/download/0.1.2/GuardCraft_Resource_Pack.zip"
-      #MC_resource_pack_sha1: "6102767c4dcd06ba10612b29ab15f5d1a58ce324"
+      #MC_resource_pack: "https://github.com/chainguard-dev/guardcraft-server/releases/download/0.1.2/GuardCraft.zip"
+      #MC_resource_pack_sha1: "ec784f4156bf0057967620020c9c1010eed2276f"
       #MC_resource_pack_id: "be26d8a0-6f82-4dcd-b286-6c5fc3a1e51f"
       #MC_require_resource_pack: "false"
 ```
@@ -99,17 +99,35 @@ This will set up a server in **Survival** mode, with **Easy** difficulty, and a 
 
 ![Spawn Area](./resources/spawn.png)
 
-To enable the custom GuardCraft Resource Pack, uncomment the last 4 lines in the `docker-compose.yaml` file. The client will automatically download the resource pack from the specified URL and verify the SHA1 checksum before applying it.
-
-### GuardCraft Resource Pack
+## GuardCraft Resource Pack
 The included Resource Pack brings fun to another level with some custom textures. Have a taste of fighting CVEs (Zombies) and 0Days (Creepers) to protect your friendly villagers! Or go for a swim and find Linky swirling in the oceans.
 
 ![GuardCraft Resource Pack Preview](./resources/1.png)
 
-The pack is optional and can be enabled by uncommenting the last 4 lines of the included `docker-compose.yaml` file. The client will automatically download and apply the resource pack. 
+- Current Version: 0.1.2
+- Direct Download link: https://github.com/chainguard-dev/guardcraft-server/releases/download/0.1.2/GuardCraft.zip
+- SHA1 Checksum: ec784f4156bf0057967620020c9c1010eed2276f
 
 
-You can also manually install the resource pack to a local Minecraft client by downloading it directly from the [GuardCraft Resource Pack Releases page](https://github.com/chainguard-dev/guardcraft-server/releases). On Linux systems, you should unpack this zip file into the `~/.minecraft/resourcepacks` directory. You'll then be able to modify your world's settings to enable the resource pack.
+### Automatic Installation
+You can enable the GuardCraft texture pack by uncommenting the last 4 lines in the `docker-compose.yaml` file, as shown:
+
+```yaml
+      # GuardCraft Custom Resource pack: Optional. Uncomment from here to enable
+      MC_resource_pack: "https://github.com/chainguard-dev/guardcraft-server/releases/download/0.1.2/GuardCraft.zip"
+      MC_resource_pack_sha1: "ec784f4156bf0057967620020c9c1010eed2276f"
+      MC_resource_pack_id: "be26d8a0-6f82-4dcd-b286-6c5fc3a1e51f"
+      MC_require_resource_pack: "false"
+```
+Clients will automatically download the resource pack from the specified URL and verify the SHA1 checksum before enabling it.
+
+### Manual Installation
+You can also manually install it on any Java Minecraft world. Download it directly from the [GuardCraft Resource Pack Releases page](https://github.com/chainguard-dev/guardcraft-server/releases) and place the zip file in your resource packs folder, in your local Minecraft installation (no need to unpack it). On Linux systems, the location should be the `~/.minecraft/resourcepacks` directory. On macOS, you can find the resource packs folder in `~/Library/Application Support/minecraft/resourcepacks`. On Windows, the folder is located at `%appdata%\.minecraft\resourcepacks`.
+
+You'll then be able to modify your world's settings to enable the resource pack by accessing the "Options" menu, then "Resource Packs". You can then select the GuardCraft Resource Pack and move it to the "Selected Resource Packs" list on the right. Make sure it sits on top of the list so it has precedence over other resource packs.
 
 
 ![Guardcraft Preview 2](./resources/3.png)
+
+### GuardCraft Skins
+The [skins](./skins) folder contains some custom player skins you can use to customize your character.
