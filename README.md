@@ -96,8 +96,38 @@ services:
 ```
 
 This will set up a server in **Survival** mode, with **Easy** difficulty, and a **Welcome to GuardCraft!** message of the day. The server will be named **GuardCraft** and will use the specified seed to generate the world. You should spawn in an area with a village nearby.
-
+ 
 ![Spawn Area](./resources/spawn.png)
+
+## Persisting World Data
+To save your world data, it is recommended to use a named volume. This will ensure that every time you run `docker compose down` and `docker compose up`, your world data will be preserved.
+
+Start by creating a named volume:
+
+```shell
+docker volume create guardcraft-world
+```
+
+Then, modify the `docker-compose.yaml` file to use the named volume as shown:
+
+```yaml
+    ports:
+      - 25565:25565
+    environment:
+      MC_gamemode: "survival"
+      MC_difficulty: "easy"
+      MC_motd: "Welcome to GuardCraft!"
+      MC_level_name: "GuardCraft"
+      MC_level_seed: "-1718501946501227358"
+    volumes:
+      - guardcraft-world:/minecraft/world
+
+volumes:
+    guardcraft-world:
+      external: true
+```
+
+The `external:true` flag tells Docker Compose to use the named volume you created earlier, instead of creating an anonymous volume mount. This will ensure that your world data is saved in the `guardcraft-world` volume.
 
 ## GuardCraft Resource Pack
 The included Resource Pack brings fun to another level with some custom textures. Have a taste of fighting CVEs (Zombies) and 0Days (Creepers) to protect your friendly villagers! Or go for a swim and find Linky swirling in the oceans.
