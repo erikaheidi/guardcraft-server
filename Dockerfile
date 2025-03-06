@@ -1,17 +1,13 @@
-FROM cgr.dev/chainguard/jre:latest-dev
+FROM cgr.dev/chainguard/jre:latest-dev@sha256:1314898643cd00ad32ed6ace3aed12b14bd8129268649734d6300339fdc15db7
 
 USER root
-RUN apk update && apk add curl libudev
+RUN apk update && apk add curl libudev jq
 RUN adduser --system minecraft
 WORKDIR /usr/share/minecraft
 
-RUN curl -O https://piston-data.mojang.com/v1/objects/4707d00eb834b446575d89a61a11b5d548d8c001/server.jar
-RUN java -jar server.jar nogui
-RUN sed -i 's/false/true/' eula.txt
-
-COPY build-config.sh /usr/share/minecraft/build-config.sh
-RUN chmod +x /usr/share/minecraft/build-config.sh
-
+COPY build-config.sh server-install.sh /usr/share/minecraft/
+RUN chmod +x /usr/share/minecraft/build-config.sh /usr/share/minecraft/server-install.sh
+RUN /usr/share/minecraft/server-install.sh
 RUN chown -R minecraft /usr/share/minecraft
 USER minecraft
 
