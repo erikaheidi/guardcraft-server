@@ -1,6 +1,8 @@
 services:
   java-server:
-    image: guardcraft-java
+    image: guardcraft-java-server
+    build:
+      context: .
     restart: unless-stopped
     ports:
       - 25565:25565
