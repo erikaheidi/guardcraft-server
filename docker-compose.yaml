@@ -1,6 +1,6 @@
 services:
   java-server:
-    image: guardcraft-java-server
+    image: guardcraft-java
     build:
       context: .
     restart: unless-stopped
