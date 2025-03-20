@@ -17,8 +17,8 @@ jobs:
       id-token: write # used to sign the commits using gitsign
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: chainguard-dev/digestabot@v1.0.2
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+    - uses: chainguard-dev/digestabot@4298e530896fb4164f9c89030c561b75b9321149 # v1.0.2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         signoff: true # optional
