@@ -4,7 +4,7 @@
 # Usage: server-download.sh [version]
 # If no version is provided, the latest version is used
 
-if [ -n "$1" ]; then
+if [ -n "$1" ] && [ "$1" != "latest" ]; then
   version=$1
 else
   version=$(curl -s https://launchermeta.mojang.com/mc/game/version_manifest.json | jq -r '.versions | first | .id')
