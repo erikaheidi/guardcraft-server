@@ -1,58 +1,48 @@
 # GuardCraft - a Containerized Minecraft Server
 
-GuardCraft is a containerized Minecraft (Java) server that is designed to be secure and easy to use. It is built on top of the [Java JRE Chainguard Image](https://images.chainguard.dev/directory/image/jre/versions). 
+GuardCraft is a containerized Minecraft (Java) server built on top of the [Java JRE Chainguard Image](https://images.chainguard.dev/directory/image/jre/versions). This is a demo that showcases the capabilities of the Chainguard Java JRE image, which is a minimal Java runtime environment with low-to-zero vulnerabilities (CVEs).
+
+- Minimal container image with low-to-zero CVEs
+- Streamlined configuration using environment variables
+- Automatic updates for the server software
+- Easy local network setup with Docker Compose
+
 
 ![Linky](./resources/linky.png)
 
-## Features
-The GuardCraft server is designed to be secure and easy to use. It includes the following features:
-- Minimal container image with low-to-zero CVEs
-- Easy configuration with environment variables
-- Easy setup with Docker Compose
+## Using the Image
 
-Currently, Guardcraft is available only for Minecraft Java version.
-
-*This setup was validated on an Ubuntu 24.04 system.*
-
-## Usage
-To build the image, run:
+The following command will run an ephemeral Minecraft Java server with default settings. This will create a world in survival mode with difficulty set to "normal", and a random world seed. The port redirection will make the server available at `localhost:25565` in the host machine.
 
 ```shell
-docker build -t guardcraft-java .
+docker run --rm -p 25565:25565 ghcr.io/chainguard-dev/guardcraft-server:latest
+```
+You'll get output similar to the following:
+
+```
+Starting net.minecraft.server.Main
+[13:06:49] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[13:06:49] [ServerMain/INFO]: No existing world data, creating new world
+[13:06:50] [ServerMain/INFO]: Loaded 1373 recipes
+[13:06:50] [ServerMain/INFO]: Loaded 1484 advancements
+[13:06:50] [Server thread/INFO]: Starting minecraft server version 1.21.5 Pre-Release 3
+[13:06:50] [Server thread/INFO]: Loading properties
+[13:06:50] [Server thread/INFO]: Default game type: SURVIVAL
+[13:06:50] [Server thread/INFO]: Generating keypair
+[13:06:50] [Server thread/INFO]: Starting Minecraft server on *:25565
+[13:06:50] [Server thread/INFO]: Using epoll channel type
+[13:06:50] [Server thread/INFO]: Preparing level "world"
+[13:06:52] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[13:06:52] [Worker-Main-8/INFO]: Preparing spawn area: 2%
+[13:06:52] [Worker-Main-7/INFO]: Preparing spawn area: 2%
+[13:06:53] [Worker-Main-12/INFO]: Preparing spawn area: 18%
+[13:06:53] [Worker-Main-7/INFO]: Preparing spawn area: 51%
+[13:06:54] [Worker-Main-12/INFO]: Preparing spawn area: 51%
+[13:06:54] [Server thread/INFO]: Time elapsed: 2168 ms
+[13:06:54] [Server thread/INFO]: Done (3.933s)! For help, type "help"
 ```
 
-Use the following command to run the image in your local environment:
-
-```shell
-docker compose up
-```
-You should be able to see output with relevant information about the server setup:
-
-```shell
-[+] Running 1/1
- ✔ Container guardcraft-server-java-server-1  Recreated                                                             0.1s 
-Attaching to java-server-1
-java-server-1  | Setting difficulty=easy
-java-server-1  | Setting gamemode=survival
-java-server-1  | Setting level-name=GuardCraft
-java-server-1  | Setting level-seed=-1718501946501227358
-java-server-1  | Setting motd=Welcome to GuardCraft!
-java-server-1  | Starting net.minecraft.server.Main
-java-server-1  | [18:11:14] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
-java-server-1  | [18:11:14] [ServerMain/INFO]: No existing world data, creating new world
-java-server-1  | [18:11:15] [ServerMain/INFO]: Loaded 1370 recipes
-java-server-1  | [18:11:15] [ServerMain/INFO]: Loaded 1481 advancements
-java-server-1  | [18:11:15] [Server thread/INFO]: Starting minecraft server version 1.21.4
-java-server-1  | [18:11:15] [Server thread/INFO]: Loading properties
-java-server-1  | [18:11:15] [Server thread/INFO]: Default game type: SURVIVAL
-java-server-1  | [18:11:15] [Server thread/INFO]: Generating keypair
-java-server-1  | [18:11:15] [Server thread/INFO]: Starting Minecraft server on *:25565
-...
-```
-
-Once the server is up and running, you can connect to it using a Minecraft Java client **on the same local network**.
-
-To connect to the server, you'll need to add a new server using the host machine's local IP address and port `25565` (the default port). You can also use the `localhost` address if you're running the server on the same machine as the client.
+You can connect to the server using a Minecraft Java client on the same local network. Add a new server using the host machine's local IP address and port `25565` (the default port). You can also use the `localhost` address if you're running the server on the same machine as the client.
 
 > Find your local IP address on Linux systems: `ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p'`
 
@@ -67,8 +57,8 @@ java-server-1  | [18:14:30] [Server thread/INFO]: boredcatmom joined the game
 
 ````
 
-## Configuration
-The GuardCraft server can be configured using dynamic environment variables that get replaced in the `server.properties` file. Any properties can be configured with the following format: `MC_<property_name>`. Hyphens (`-`) should be replaced with underscores (`_`). For example, to set the `server-port` property, use the `MC_server_port` environment variable. The [Minecraft wiki](https://minecraft.fandom.com/wiki/Server.properties) has a list of all available properties.
+## Server Configuration
+The GuardCraft server can be configured using dynamic environment variables that get replaced in the `server.properties` file. Any properties can be configured with the following format: `MC_<property_name>`. Hyphens (`-`) should be replaced with underscores (`_`). For example, to set the `server-port` property, use the `MC_server_port` environment variable. The [Minecraft wiki](https://minecraft.fandom.com/wiki/Server.properties) has a list of all available properties. You can use the [docker-compose.yaml](https://github.com/chainguard-dev/guardcraft-server/blob/main/docker-compose.yaml) file in this repository as a reference to set up your server.
 
 Included `docker-compose.yaml` file:
 
@@ -129,12 +119,48 @@ volumes:
 
 The `external:true` flag tells Docker Compose to use the named volume you created earlier, instead of creating an anonymous volume mount. This will ensure that your world data is saved in the `guardcraft-world` volume.
 
+## Building from Source
+You can also build this image from source in your local environment. Clone the repository and navigate to the `guardcraft-java` directory. To build the image, run:
+
+```shell
+docker build -t guardcraft-java .
+```
+
+Use the following command to run the image in your local environment:
+
+```shell
+docker compose up
+```
+You should be able to see output with relevant information about the server setup:
+
+```shell
+[+] Running 1/1
+ ✔ Container guardcraft-server-java-server-1  Recreated                                                             0.1s 
+Attaching to java-server-1
+java-server-1  | Setting difficulty=easy
+java-server-1  | Setting gamemode=survival
+java-server-1  | Setting level-name=GuardCraft
+java-server-1  | Setting level-seed=-1718501946501227358
+java-server-1  | Setting motd=Welcome to GuardCraft!
+java-server-1  | Starting net.minecraft.server.Main
+java-server-1  | [18:11:14] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+java-server-1  | [18:11:14] [ServerMain/INFO]: No existing world data, creating new world
+java-server-1  | [18:11:15] [ServerMain/INFO]: Loaded 1370 recipes
+java-server-1  | [18:11:15] [ServerMain/INFO]: Loaded 1481 advancements
+java-server-1  | [18:11:15] [Server thread/INFO]: Starting minecraft server version 1.21.4
+java-server-1  | [18:11:15] [Server thread/INFO]: Loading properties
+java-server-1  | [18:11:15] [Server thread/INFO]: Default game type: SURVIVAL
+java-server-1  | [18:11:15] [Server thread/INFO]: Generating keypair
+java-server-1  | [18:11:15] [Server thread/INFO]: Starting Minecraft server on *:25565
+...
+```
+
 ## GuardCraft Resource Pack
-The included Resource Pack brings fun to another level with some custom textures. Have a taste of fighting CVEs (Zombies) and 0Days (Creepers) to protect your friendly villagers! Or go for a swim and find Linky swirling in the oceans.
+ Have a taste of fighting CVEs (Zombies) and 0Days (Creepers) to protect your friendly villagers! Or go for a swim and find Linky swirling in the oceans.
 
 ![GuardCraft Resource Pack Preview](./resources/1.png)
 
-- Current Version: 0.1.2
+- Latest Resource Pack Version: 0.1.2
 - Direct Download link: https://github.com/chainguard-dev/guardcraft-server/releases/download/0.1.2/GuardCraft.zip
 - SHA1 Checksum: ec784f4156bf0057967620020c9c1010eed2276f
 
