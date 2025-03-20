@@ -12,7 +12,7 @@ GuardCraft is a containerized Minecraft (Java) server built on top of the [Java 
 
 ## Using the Image
 
-The following command will run an ephemeral Minecraft Java server with default settings. This will create a world in survival mode with difficulty set to "normal", and a random world seed. The port redirection will make the server available at `localhost:25565` in the host machine.
+The following command will run an ephemeral Minecraft Java server with default settings. This will create a world in survival mode with difficulty set to "normal", and a random world seed, using the latest version of the Minecraft server. The port redirection will make the server available at `localhost:25565` in the host machine.
 
 ```shell
 docker run --rm -p 25565:25565 ghcr.io/chainguard-dev/guardcraft-server:latest
@@ -42,7 +42,11 @@ Starting net.minecraft.server.Main
 [13:06:54] [Server thread/INFO]: Done (3.933s)! For help, type "help"
 ```
 
-You can connect to the server using a Minecraft Java client on the same local network. Add a new server using the host machine's local IP address and port `25565` (the default port). You can also use the `localhost` address if you're running the server on the same machine as the client.
+You can connect to the server using a Minecraft Java client on the same local network. Please note the client must be running the same version of the server software (in this case, `1.21.5 Pre-Release 3`) - you may need to select the appropriate version in the Minecraft launcher software.
+
+To specify which version of the server you want to use, you'll need to [build the image from source](#building-from-source) and provide a build time argument to specify which version you want to install.
+
+Add a new server using the host machine's local IP address and port `25565` (the default port). You can also use the `localhost` address if you're running the server on the same machine as the client.
 
 > Find your local IP address on Linux systems: `ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p'`
 
@@ -124,6 +128,11 @@ You can also build this image from source in your local environment. Clone the r
 
 ```shell
 docker build -t guardcraft-java .
+```
+If you want to specify the version of the Minecraft server, you can pass the `VERSION` argument at build time, like this:
+
+```shell
+docker build --build-arg VERSION=1.21.4 . -t guardcraft-java
 ```
 
 Use the following command to run the image in your local environment:
