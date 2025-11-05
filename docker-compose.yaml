@@ -1,6 +1,6 @@
 services:
   java-server:
-    image: guardcraft-java
+    image: guardcraft-server
     build:
       context: .
     restart: unless-stopped
@@ -15,8 +15,3 @@ services:
       MC_motd: "Welcome to GuardCraft!"
       MC_level_name: "GuardCraft"
       MC_level_seed: "-1718501946501227358"
-      # GuardCraft Custom Resource pack: Optional. Uncomment from here to enable
-      #MC_resource_pack: "https://github.com/chainguard-dev/guardcraft-server/releases/download/0.1.2/GuardCraft.zip"
-      #MC_resource_pack_sha1: "ec784f4156bf0057967620020c9c1010eed2276f"
-      #MC_resource_pack_id: "be26d8a0-6f82-4dcd-b286-6c5fc3a1e51f"
-      #MC_require_resource_pack: "false"
