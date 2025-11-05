@@ -6,17 +6,17 @@ on:
     # At the end of every day
     - cron: "0 0 * * *"
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   image-update:
+    if: ${{ github.repository_owner == 'chainguard-demo' }}
+
     name: Image digest update
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write # to push the updates
-      pull-requests: write # to open Pull requests
+      contents: read # To clone the repo
       id-token: write # used to sign the commits using gitsign
 
     steps:
@@ -26,13 +26,13 @@ jobs:
         egress-policy: audit
 
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+    - uses: octo-sts/action@d6c70ad3b9ac85df6da6b9749014d7283987cfec # v1.0.3
+      id: octo-sts
+      with:
+        scope: ${{ github.repository }}
+        identity: digestabot
+
     - uses: chainguard-dev/digestabot@4298e530896fb4164f9c89030c561b75b9321149 # v1.0.2
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        signoff: true # optional
-        author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com> # optional
-        committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com> # optional
-        labels-for-pr: automated pr, kind/cleanup, release-note-none # optional
-        branch-for-pr: update-digests # optional
-        title-for-pr: Update images digests # optional
-        commit-message: Update images digests # optional
+        token: ${{ steps.octo-sts.outputs.token }}
