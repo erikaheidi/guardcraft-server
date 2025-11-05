@@ -15,7 +15,7 @@ GuardCraft is a containerized Minecraft (Java) server built on top of the [Java 
 The following command will run an ephemeral Minecraft Java server with default settings. This will create a world in survival mode with difficulty set to "normal", and a random world seed, using the latest version of the Minecraft server. The port redirection will make the server available at `localhost:25565` in the host machine.
 
 ```shell
-docker run --rm -p 25565:25565 ghcr.io/chainguard-dev/guardcraft-server:latest
+docker run --rm -p 25565:25565 ghcr.io/chainguard-demo/guardcraft-server:latest
 ```
 You'll get output similar to the following:
 
@@ -82,11 +82,6 @@ services:
       MC_motd: "Welcome to GuardCraft!"
       MC_level_name: "GuardCraft"
       MC_level_seed: "-1718501946501227358"
-      # GuardCraft Custom Resource pack: Optional. Uncomment from here to enable
-      #MC_resource_pack: "https://github.com/chainguard-dev/guardcraft-server/releases/download/0.1.2/GuardCraft.zip"
-      #MC_resource_pack_sha1: "ec784f4156bf0057967620020c9c1010eed2276f"
-      #MC_resource_pack_id: "be26d8a0-6f82-4dcd-b286-6c5fc3a1e51f"
-      #MC_require_resource_pack: "false"
 ```
 
 This will set up a server in **Survival** mode, with **Easy** difficulty, and a **Welcome to GuardCraft!** message of the day. The server will be named **GuardCraft** and will use the specified seed to generate the world. You should spawn in an area with a village nearby.
@@ -163,36 +158,6 @@ java-server-1  | [18:11:15] [Server thread/INFO]: Generating keypair
 java-server-1  | [18:11:15] [Server thread/INFO]: Starting Minecraft server on *:25565
 ...
 ```
-
-## GuardCraft Resource Pack
- Have a taste of fighting CVEs (Zombies) and 0Days (Creepers) to protect your friendly villagers! Or go for a swim and find Linky swirling in the oceans.
-
-![GuardCraft Resource Pack Preview](./resources/1.png)
-
-- Latest Resource Pack Version: 0.1.2
-- Direct Download link: https://github.com/chainguard-dev/guardcraft-server/releases/download/0.1.2/GuardCraft.zip
-- SHA1 Checksum: ec784f4156bf0057967620020c9c1010eed2276f
-
-
-### Automatic Installation
-You can enable the GuardCraft texture pack by uncommenting the last 4 lines in the `docker-compose.yaml` file, as shown:
-
-```yaml
-      # GuardCraft Custom Resource pack: Optional. Uncomment from here to enable
-      MC_resource_pack: "https://github.com/chainguard-dev/guardcraft-server/releases/download/0.1.2/GuardCraft.zip"
-      MC_resource_pack_sha1: "ec784f4156bf0057967620020c9c1010eed2276f"
-      MC_resource_pack_id: "be26d8a0-6f82-4dcd-b286-6c5fc3a1e51f"
-      MC_require_resource_pack: "false"
-```
-Clients will automatically download the resource pack from the specified URL and verify the SHA1 checksum before enabling it.
-
-### Manual Installation
-You can also manually install it on any Java Minecraft world. Download it directly from the [GuardCraft Resource Pack Releases page](https://github.com/chainguard-dev/guardcraft-server/releases) and place the zip file in your resource packs folder, in your local Minecraft installation (no need to unpack it). On Linux systems, the location should be the `~/.minecraft/resourcepacks` directory. On macOS, you can find the resource packs folder in `~/Library/Application Support/minecraft/resourcepacks`. On Windows, the folder is located at `%appdata%\.minecraft\resourcepacks`.
-
-You'll then be able to modify your world's settings to enable the resource pack by accessing the "Options" menu, then "Resource Packs". You can then select the GuardCraft Resource Pack and move it to the "Selected Resource Packs" list on the right. Make sure it sits on top of the list so it has precedence over other resource packs.
-
-
-![Guardcraft Preview 2](./resources/3.png)
 
 ### GuardCraft Skins
 The [skins](./skins) folder contains some custom player skins you can use to customize your character.
